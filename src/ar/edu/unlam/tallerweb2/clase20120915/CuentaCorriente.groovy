@@ -1,26 +1,51 @@
 package ar.edu.unlam.tallerweb2.clase20120915
 
 class CuentaCorriente extends Cuenta {
+	def descubierto = -1000
+	def cantMaxMovimientosSC   = 5
+	def precioMultaMovimientos = 2
 	
-
 	@Override
-	double extraer(double importe) {
-		if(importe<=0){
-			throw new ImporteNegativoException('El importe a extraer debe ser positivo.')
+	void importeValido(double importe){
+		if (importe <= 0){
+			throw new ImporteIncorrectoException('Importe a extraer incorrecto.')
 		}
-
-		double saldoParcial = saldo
-		if(cantidadMovimientos + 1 > 5){
-			importe +=2
+	}
+	
+	double multaMovimientos(def movimiento){
+		double suma = 0
+		 
+		if (movimiento > cantMaxMovimientosSC)
+			 	suma = precioMultaMovimientos
+		
+		suma
+			 
 		}
-
-		saldoParcial -= importe
-		if(saldoParcial>-1000){
+	@Override
+	void restaSaldo(double importe){
+		def saldoParcial = saldo - importe
+		
+		if(saldoParcial < descubierto){
+			throw new SaldoInsuficienteException('Saldo Insuficiente')
+			}		 
+		else{
 			saldo = saldoParcial
 			cantidadMovimientos++
-		}else{
-			throw new SaldoInsuficienteException('El saldo actual $'+saldo+' no le permite realizar la extracción.')
 		}
+		 
+		}
+	
+	@Override
+	double extraer(double importe) {
+		def movimientoActual = cantidadMovimientos + 1
+		
+		importeValido(importe)
+
+		importe = importe + multaMovimientos(movimientoActual)
+		
+		restaSaldo(importe)
+		
 		saldo
+
 	}
 }

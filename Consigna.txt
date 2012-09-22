@@ -1,6 +1,10 @@
-Modelar el sistema de cuentas de un banco.
-Las mismas pueden ser Cta Cte o Caja de Ahorro
-Las CC tienen un debito de $2 por cada extracción, posterior a la quinta.
- y permiten un descubierto de hasta $1000.
-Las CA en cambio no tienen debitos adicionales, pero permiten extracciones de hasta $1000
-Cada Cuenta Corriente tiene un cliente asociado a la misma.
+* Modelar el sistema de cuentas de un Banco
+---------------------------------------------
+
+* Las mismas pueden ser:
+	a) Cuenta Corriente
+	b) Caja de ahorro
+
+* Las Cuentas Corrientes tiene un débito de 2 por extraccón posterior a la quinta extraccion, y permiten un descubierto de hasta $1000
+* Las Cajas de Ahorros, en cambio, no tienen débitos adicionales, pero permiten extracciones de hasta $1000 
+* Cada Cuenta tiene un cliente asociado a la misma.
